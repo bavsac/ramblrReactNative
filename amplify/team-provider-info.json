@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ramblrreactnative-dev-121319-authRole",
+      "UnauthRoleArn": "arn:aws:iam::073566067275:role/amplify-ramblrreactnative-dev-121319-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::073566067275:role/amplify-ramblrreactnative-dev-121319-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-ramblrreactnative-dev-121319-deployment",
+      "UnauthRoleName": "amplify-ramblrreactnative-dev-121319-unauthRole",
+      "StackName": "amplify-ramblrreactnative-dev-121319",
+      "StackId": "arn:aws:cloudformation:eu-west-2:073566067275:stack/amplify-ramblrreactnative-dev-121319/3463dba0-cb6f-11eb-9312-0623977acff8",
+      "AmplifyAppId": "d3iaf9d625zik0"
+    },
+    "categories": {
+      "function": {
+        "ramblrreactnative2a7ef6822a7ef682PostConfirmation": {
+          "deploymentBucketName": "amplify-ramblrreactnative-dev-121319-deployment",
+          "s3Key": "amplify-builds/ramblrreactnative2a7ef6822a7ef682PostConfirmation-5a4f6e4e736f3751346c-build.zip"
+        }
+      },
+      "auth": {
+        "ramblrreactnative2a7ef6822a7ef682": {}
+      }
+    }
+  }
+}
