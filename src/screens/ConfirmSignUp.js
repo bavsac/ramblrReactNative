@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
@@ -22,6 +22,10 @@ export default function ConfirmSignUp({ navigation }) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
+      <Image
+          style={styles.logo}
+          source={require('../images/ramblr-logo.png')}
+        />
         <Text style={styles.title}>Confirm Sign Up</Text>
         <AppTextInput
           value={username}
@@ -48,7 +52,8 @@ export default function ConfirmSignUp({ navigation }) {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    paddingTop: 130,
+    backgroundColor: '#63a55d',
   },
   container: {
     flex: 1,
@@ -59,5 +64,10 @@ const styles = StyleSheet.create({
     color: '#202020',
     fontWeight: '500',
     marginVertical: 15,
+  },
+  logo: {
+    width: 300,
+    height: 40,
+    resizeMode: 'contain',
   },
 });

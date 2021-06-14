@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
@@ -21,6 +21,10 @@ export default function SignUp({ navigation }) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
+      <Image
+          style={styles.logo}
+          source={require('../images/ramblr-logo.png')}
+        />
         <Text style={styles.title}>Create a new account</Text>
         <AppTextInput
           value={username}
@@ -74,7 +78,8 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    paddingTop: 130,
+    backgroundColor: '#63a55d',
   },
   container: {
     flex: 1,
@@ -92,8 +97,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   forgotPasswordButtonText: {
-    color: 'tomato',
+    color: '#deffd6',
     fontSize: 18,
     fontWeight: '600',
+  },
+  logo: {
+    width: 300,
+    height: 40,
+    resizeMode: 'contain',
   },
 });

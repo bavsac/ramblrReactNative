@@ -59,7 +59,7 @@ export default function SignIn({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    paddingTop: 190,
+    paddingTop: 130,
     backgroundColor: '#63a55d',
   },
   container: {
