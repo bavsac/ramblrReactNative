@@ -8,7 +8,9 @@ import { withAuthenticator } from 'aws-amplify-react-native'
 
 Amplify.configure(awsmobile);
 
-function App() {
+function App(props) {
+  
+  console.log(props.authData, "<<< Trying to find username" );
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
