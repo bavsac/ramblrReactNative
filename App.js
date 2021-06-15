@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Amplify from 'aws-amplify'
 import awsmobile from './src/aws-exports'
 import { withAuthenticator } from 'aws-amplify-react-native'
-import Coordinates from './src/components/coordinates';
+import Coordinates from './src/components/Coordinates';
 
 Amplify.configure(awsmobile);
 
