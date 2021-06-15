@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
 import Coordinates from '../components/Coordinates';
+import Friends from '../components/Friends'
 
 export default function Home({ updateAuthState }) {
   async function signOut() {
@@ -21,6 +22,7 @@ export default function Home({ updateAuthState }) {
       />
       <AppButton onPress={signOut} title="Sign Out " />
       <Coordinates />
+      <Friends props/>
     </View>
   );
 }

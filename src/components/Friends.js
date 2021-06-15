@@ -6,10 +6,9 @@ export default function Friends (props) {
 
         return (
             <View>
-                <Button title="Friends List" onPress={() => {
+                <Button title="Friends List" onPress={(props) => {
                 console.log(props)
                 }}/>
-
             </View>
         )
     }
