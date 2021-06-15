@@ -31,8 +31,6 @@ export default function Coordinates() {
   } else if (location) {
     const longitude = JSON.stringify(location.coords.longitude);
     const latitude = JSON.stringify(location.coords.latitude);
-    console.log(typeof latitude, '<<this is the type of latitude');
-    console.log(typeof +latitude, '<<this is the type of latitude with a +');
     text = `Latitude: ${latitude} Longitude: ${longitude}`;
   }
 

@@ -6,6 +6,7 @@ import Amplify from 'aws-amplify'
 import awsmobile from './src/aws-exports'
 import { withAuthenticator } from 'aws-amplify-react-native'
 import Coordinates from './src/components/Coordinates';
+// import Friends from './src/components/Friends'
 
 Amplify.configure(awsmobile);
 
@@ -17,6 +18,7 @@ function App(props) {
       <Text>Ramblr</Text>
       <StatusBar style="auto" />
       <Coordinates />
+      {/* <Friends info={props}/> */}
     </View>
   );
 }
