@@ -12,7 +12,6 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import ConfirmSignUp from './src/screens/ConfirmSignUp';
 import Home from './src/screens/Home';
-import Coordinates from "./src/components/Coordinates"
 
 Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
@@ -75,7 +74,7 @@ function App() {
   }
 
   return (
-    
+   
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
@@ -84,8 +83,9 @@ function App() {
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
-      <Coordinates />
     </NavigationContainer>
+
+   
     
   );
 
