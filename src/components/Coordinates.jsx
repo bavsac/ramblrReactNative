@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import Marker from 'react-native-maps';
 
 export default function Coordinates() {
+  const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({
     coords: {
       longitude: 0,
@@ -16,6 +17,7 @@ export default function Coordinates() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
+      setIsLoading(true);
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
@@ -23,6 +25,7 @@ export default function Coordinates() {
 
       let currentLocation = await Location.getCurrentPositionAsync({});
       setLocation(currentLocation);
+      setIsLoading(false);
     })();
   }, []);
 
@@ -42,27 +45,28 @@ export default function Coordinates() {
     longitudeDelta: 0.0421,
   };
 
-  return (
-    <View style={styles.container}>
-      {/* <Text style={styles.paragraph}>{text}</Text> */}
-      <MapView style={styles.map} showsUserLocation region={region}></MapView>
-    </View>
-  );
+  if (isLoading) {
+    return (
+      <ActivityIndicator style={styles.isloading} size="large" color="white" />
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        {/* <Text style={styles.paragraph}>{text}</Text> */}
+        <MapView style={styles.map} showsUserLocation region={region}></MapView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    color: '#4BA64F',
-    // flex: 1,
-
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20,
-  },
   map: {
     height: 300,
     width: 300,
     borderRadius: 20,
+  },
+  isloading: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

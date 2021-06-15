@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
-import Coordinates from "../components/Coordinates";
+import Coordinates from '../components/Coordinates';
 
 export default function Home({ updateAuthState }) {
   async function signOut() {
