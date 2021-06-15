@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Amplify from 'aws-amplify'
 import awsmobile from './src/aws-exports'
 import { withAuthenticator } from 'aws-amplify-react-native'
+import Coordinates from './src/components/coordinates';
 
 Amplify.configure(awsmobile);
 
@@ -13,8 +14,9 @@ function App(props) {
   console.log(props.authData, "<<< Trying to find username" );
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Ramblr</Text>
       <StatusBar style="auto" />
+      <Coordinates />
     </View>
   );
 }
