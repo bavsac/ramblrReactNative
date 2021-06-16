@@ -7,7 +7,7 @@ import API_KEY from "../../API_KEY.env.js"
 
 
 const ScheduleText = () => {
-    const [contact, setContact] = useState('07429818181')
+    const [contact, setContact] = useState('')
     const [time, setTime] = useState("June 17, 2021 13:46:23 ")
 
     axios.interceptors.request.use(

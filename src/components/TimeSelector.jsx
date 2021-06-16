@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Platform, Text} from 'react-native';
+import {View, Button, Platform, Text,TextInput, StyleSheet, Keyboard} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {durationInSeconds} from '../utils/time-utils'
 import CounterApp from './CounterApp'
@@ -11,6 +11,9 @@ export const TimeSelector = () => {
   const [show, setShow] = useState(false);
   const [duration, setDuration] = useState(0);
   const [timerEnd, setTimerEnd] = useState(false);
+  const [contactNumber, setContactNumber] = useState('');
+  const [confirmContactNumber, setConfirmContactNumber] = useState('');
+  const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
 
   useEffect(()=>{
     setTimerEnd(true)
@@ -41,23 +44,45 @@ export const TimeSelector = () => {
   };
 
   return (
-    <View>
- 
-       
+    <View style={styles.container}>
+
         <Button onPress={showDatepicker} title="Show date picker!" />
-  
         <Button onPress={showTimepicker} title="Show time picker!" />
    
-        <Button onPress={() => {
+
+        <TextInput
+        style={styles.input}
+        value={contactNumber}
+        placeholder="enter number"
+        onChangeText={setContactNumber}
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={styles.input}
+        value={confirmContactNumber}
+        placeholder="Re-enter number"
+        onChangeText={setConfirmContactNumber}
+        keyboardType="numeric"
+      />
+        
+
+      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
+        Keyboard.dismiss
+          setTimerEnd(false); 
+          console.log("TimeSelector >>>>>> button pressed");
+          console.log("TimeSelector >>>>>>> new duration!:",duration)
+        }} title="Start timer!" />:null}
+
+        {/* <Button onPress={() => {
           setTimerEnd(false); 
           console.log("button pressed");
           console.log("new duration!:",duration)
-        }} title="Start timer!" />
+        }} title="Start timer!" /> */}
 
         <Button onPress={()=> {setDuration(0)}} title="Reset"/>
 
       <Text>duration in state: {duration}</Text>
-      {show && (
+      {/* {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -66,7 +91,7 @@ export const TimeSelector = () => {
           display="default"
           onChange={onChange}
         />
-      )}
+      )} */}
       	<CounterApp 
         timerEnd={timerEnd}
         setTimerEnd={setTimerEnd}
@@ -75,3 +100,13 @@ export const TimeSelector = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container:{
+    paddingTop: 50,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+  },
+});

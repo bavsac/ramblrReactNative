@@ -84,7 +84,8 @@ function App() {
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
-      <TimeSelector  />
+       <TimeSelector  /> 
+      {/*NEW LINE HERE ^^^*/}
     </NavigationContainer>
     
   );

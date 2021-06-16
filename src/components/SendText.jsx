@@ -76,13 +76,13 @@ console.log("config changed");
 
   return (
     <>
-      <TextInput
+      {/* <TextInput
         style={styles.input}
         value={contactNumber}
         placeholder="enter number"
         onChangeText={setContactNumber}
         keyboardType="numeric"
-      />
+      /> */}
 
       <TextInput
         style={styles.input}
