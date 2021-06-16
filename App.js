@@ -12,6 +12,7 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import ConfirmSignUp from './src/screens/ConfirmSignUp';
 import Home from './src/screens/Home';
+import { TimeSelector } from './src/components/TimeSelector';
 
 Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
@@ -74,6 +75,7 @@ function App() {
   }
 
   return (
+    
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
@@ -82,7 +84,9 @@ function App() {
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
+      <TimeSelector  />
     </NavigationContainer>
+    
   );
 
   // async function signOut() {
