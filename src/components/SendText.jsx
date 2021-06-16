@@ -3,14 +3,13 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 import API_KEY from '../../API_KEY.env';
 
-
-const SendText = ({timerEnd}) => {
+const SendText = ({ timerEnd }) => {
   const [contactNumber, setContactNumber] = useState('');
-  const [message, setMessage] = useState('sent with a time end');
-  console.log(timerEnd, "<<< timerEnd in the send text func");
+  const [message, setMessage] = useState('');
+  console.log(timerEnd, '<<< timerEnd in the send text func');
 
-  useEffect(()=>{
-    console.log(timerEnd, "<<< timerEnd in the send text func in useEffect");
+  useEffect(() => {
+    console.log(timerEnd, '<<< timerEnd in the send text func in useEffect');
     axios({
       method: 'post',
       url: url,
@@ -40,14 +39,14 @@ const SendText = ({timerEnd}) => {
     //     console.log(error);
     //   }
     // );
-  },[timerEnd])
+  }, [timerEnd]);
 
   const url = 'https://api.thesmsworks.co.uk/v1/message/send';
 
   axios.interceptors.request.use(
     (config) => {
       config.headers.authorization = API_KEY;
-console.log("config changed");
+      console.log('config changed');
       return config;
     },
     (err) => {
@@ -76,14 +75,6 @@ console.log("config changed");
 
   return (
     <>
-      {/* <TextInput
-        style={styles.input}
-        value={contactNumber}
-        placeholder="enter number"
-        onChangeText={setContactNumber}
-        keyboardType="numeric"
-      /> */}
-
       <TextInput
         style={styles.input}
         value={message}
