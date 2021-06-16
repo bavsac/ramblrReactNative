@@ -1,33 +1,54 @@
-import React, {useState, useEffect} from 'react';
-import {View, Button, Platform, Text,TextInput, StyleSheet, Keyboard} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Button,
+  Platform,
+  Text,
+  TextInput,
+  StyleSheet,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {durationInSeconds} from '../utils/time-utils'
-import CounterApp from './CounterApp'
-import SendText from './SendText';
+import { durationInSeconds } from '../utils/time-utils';
+// import CounterApp from './CounterApp';
+// import SendText from './SendText';
+// import AppTextInput from '../components/AppTextInput';
+// import AppButton from '../components/AppButton';
+import Coordinates from './Coordinates';
+
+// import ScheduleText from './ScheduleText'
+const moment = require ('moment')
 
 export const TimeSelector = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [timerEnd, setTimerEnd] = useState(false);
-  const [contactNumber, setContactNumber] = useState('');
-  const [confirmContactNumber, setConfirmContactNumber] = useState('');
-  const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
+  const [endTime, setEndTime] = useState("");
+  // const [duration, setDuration] = useState(0);
+  // const [timerEnd, setTimerEnd] = useState(false);
+  // const [contactNumber, setContactNumber] = useState('');
+  // const [confirmContactNumber, setConfirmContactNumber] = useState('');
+  // const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
 
-  useEffect(()=>{
-    setTimerEnd(true)
-  },[duration])
-
+  // useEffect(() => {
+  //   setTimerEnd(true);
+  // }, [duration]);
 
   const onChange = (event, selectedDate) => {
-    
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    const output = durationInSeconds(event.nativeEvent.timestamp)
-    setDuration(output)
-    console.log(output, '<< output')
+
+    const unformattedTimestamp = event.nativeEvent.timestamp
+
+    const duration = durationInSeconds(unformattedTimestamp)
+    setEndTime(duration)
+    console.log("the time from timeSelector:",endTime)
+
+    // const output = durationInSeconds(event.nativeEvent.timestamp);
+    // setDuration(output);
+    // console.log(output, '<< output');
   };
 
   const showMode = (currentMode) => {
@@ -40,49 +61,20 @@ export const TimeSelector = () => {
   };
 
   const showTimepicker = () => {
-   showMode('time');
+    showMode('time');
   };
 
   return (
-    <View style={styles.container}>
-
-        <Button onPress={showDatepicker} title="Show date picker!" />
-        <Button onPress={showTimepicker} title="Show time picker!" />
-   
-
-        <TextInput
-        style={styles.input}
-        value={contactNumber}
-        placeholder="enter number"
-        onChangeText={setContactNumber}
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        value={confirmContactNumber}
-        placeholder="Re-enter number"
-        onChangeText={setConfirmContactNumber}
-        keyboardType="numeric"
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.mainContainer}>
+        <Text style={styles.headerText}>Start your Rambl!</Text>
+        <View style={styles.container}>
+          {/* <AppButton title="Select return date" onPress={showDatepicker} />
+          <AppButton title="Select return time" onPress={showTimepicker} /> */}
+          <Button onPress={showDatepicker} title="Select return date" />
+          <Button onPress={showTimepicker} title="Select return time" />
         
-
-      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
-        Keyboard.dismiss
-          setTimerEnd(false); 
-          console.log("TimeSelector >>>>>> button pressed");
-          console.log("TimeSelector >>>>>>> new duration!:",duration)
-        }} title="Start timer!" />:null}
-
-        {/* <Button onPress={() => {
-          setTimerEnd(false); 
-          console.log("button pressed");
-          console.log("new duration!:",duration)
-        }} title="Start timer!" /> */}
-
-        <Button onPress={()=> {setDuration(0)}} title="Reset"/>
-
-      <Text>duration in state: {duration}</Text>
-      {show && (
+          {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -92,21 +84,101 @@ export const TimeSelector = () => {
           onChange={onChange}
         />
       )}
-      	<CounterApp 
-        timerEnd={timerEnd}
-        setTimerEnd={setTimerEnd}
-        duration={duration}/>
-        <SendText timerEnd={timerEnd}/>
-    </View>
+      
+      
+      <Coordinates endTime={endTime}/>
+        </View>
+        {/* <AppTextInput
+          leftIcon="phone"
+          placeholder="Enter trusted contact number here"
+          textContentType="telephoneNumber"
+          style={styles.input}
+          value={contactNumber}
+          onChangeText={setContactNumber}
+          keyboardType="numeric"
+        />
+        <AppTextInput
+          leftIcon="phone"
+          style={styles.input}
+          value={confirmContactNumber}
+          placeholder="Re-enter number"
+          onChangeText={setConfirmContactNumber}
+          keyboardType="numeric"
+        />
+
+        <View style={styles.timerButtons}>
+          {contactNumber === confirmContactNumber &&
+          confirmContactNumber !== '' ? (
+            <AppButton
+              onPress={() => {
+                Keyboard.dismiss;
+                setTimerEnd(false);
+              }}
+              title="Start timer!"
+            />
+          ) : null} */}
+
+          {/* <Button onPress={() => {
+          setTimerEnd(false); 
+          console.log("button pressed");
+          console.log("new duration!:",duration)
+        }} title="Start timer!" /> */}
+
+          {/* <AppButton
+            onPress={() => {
+              setDuration(0);
+            }}
+            title="Reset Timer"
+          /> */}
+        </View>
+        {/* <Text>duration in state: {duration}</Text> */}
+        {/* {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )} */}
+        {/* <CounterApp
+          timerEnd={timerEnd}
+          setTimerEnd={setTimerEnd}
+          duration={duration}
+        />
+        <SendText timerEnd={timerEnd} /> */}
+      {/* </View> */}
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
-  container:{
-    paddingTop: 50,
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 5,
   },
   input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
+    width: 150,
+  },
+  headerText: {
+    marginTop: 50,
+    marginBottom: 30,
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: 300,
+    height: 50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    elevation: 15,
+  },
+  timerButtons: {
+    alignItems: 'center',
   },
 });

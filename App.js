@@ -1,18 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState, useEffect } from 'react';
+import ScheduleText from './src/components/ScheduleText';
 import Amplify, { Auth } from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import Header from './src/components/Header';
 import AppButton from './src/components/AppButton';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import ConfirmSignUp from './src/screens/ConfirmSignUp';
 import Home from './src/screens/Home';
-import { TimeSelector } from './src/components/TimeSelector';
+import Coordinates from './src/components/Coordinates';
+import TimeSelector from './src/components/TimeSelector';
 
 Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
@@ -75,7 +76,6 @@ function App() {
   }
 
   return (
-    
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
@@ -84,10 +84,7 @@ function App() {
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
-       <TimeSelector  /> 
-      {/*NEW LINE HERE ^^^*/}
     </NavigationContainer>
-    
   );
 
   // async function signOut() {

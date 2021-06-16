@@ -1,9 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
 import Coordinates from '../components/Coordinates';
-import Friends from '../components/Friends'
+import Friends from '../components/Friends';
+import { TimeSelector } from '../components/TimeSelector';
 
 export default function Home({ updateAuthState }) {
   async function signOut() {
@@ -15,26 +23,32 @@ export default function Home({ updateAuthState }) {
     }
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.logocontainer}></View>
-      <Image
-        style={styles.logo}
-        source={require('../images/ramblr-logo.png')}
-      />
-      <AppButton onPress={signOut} title="Sign Out " />
-      <Coordinates />
-      <Friends props/>
-    </View>
+    <ImageBackground
+      source={require('../images/ramblr-background-3.jpg')}
+      style={styles.image}
+    >
+      <View style={styles.container}>
+        <View style={styles.logocontainer}></View>
+        <Image
+          style={styles.logo}
+          source={require('../images/ramblr-logo.png')}
+        />
+        <TimeSelector />
+        <AppButton onPress={signOut} title="Sign Out " />
+        {/* <Coordinates /> */}
+        {/* <Friends props /> */}
+      </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#63a55d',
+
     alignItems: 'center',
   },
   logo: {
-    marginTop: -50,
+    marginTop: -53,
     marginBottom: 20,
     width: 300,
     height: 40,
@@ -43,12 +57,18 @@ const styles = StyleSheet.create({
   logocontainer: {
     height: 100,
     width: 380,
-    backgroundColor: '#63a55d',
-    resizeMode: 'cover',
+    backgroundColor: '#527968',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.9,
     shadowRadius: 3,
-    elevation: 5,
+    elevation: 15,
+    opacity: 0.8,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    height: '120%',
   },
 });

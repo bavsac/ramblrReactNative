@@ -3,9 +3,13 @@ import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import Marker from 'react-native-maps';
+import { createMessage } from '../utils/sms-utils';
+import ScheduleText from '../components/ScheduleText'
 
-export default function Coordinates() {
+export default function Coordinates(endTime) {
   const [isLoading, setIsLoading] = useState(true);
+  let latitude = "not done yet"
+  let longitude = "not done yet"
   const [location, setLocation] = useState({
     coords: {
       longitude: 0,
@@ -32,10 +36,11 @@ export default function Coordinates() {
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
-  } else if (location) {
-    const longitude = JSON.stringify(location.coords.longitude);
-    const latitude = JSON.stringify(location.coords.latitude);
+  } if (location) {
+    longitude = JSON.stringify(location.coords.longitude);
+    latitude = JSON.stringify(location.coords.latitude);
     text = `Latitude: ${latitude} Longitude: ${longitude}`;
+    createMessage()
   }
 
   const region = {
@@ -52,9 +57,10 @@ export default function Coordinates() {
   } else {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.paragraph}>{text}</Text> */}
-        <MapView style={styles.map} showsUserLocation region={region}></MapView>
-      </View>
+      <Text style={styles.paragraph}>your location: {text}</Text>
+      <MapView style={styles.map} showsUserLocation region={region}></MapView>
+      <ScheduleText latitude={latitude} longitude={longitude} endTime={endTime}/>
+    </View>
     );
   }
 }
