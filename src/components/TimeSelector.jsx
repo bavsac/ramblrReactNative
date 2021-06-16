@@ -82,7 +82,7 @@ export const TimeSelector = () => {
         <Button onPress={()=> {setDuration(0)}} title="Reset"/>
 
       <Text>duration in state: {duration}</Text>
-      {/* {show && (
+      {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -91,7 +91,7 @@ export const TimeSelector = () => {
           display="default"
           onChange={onChange}
         />
-      )} */}
+      )}
       	<CounterApp 
         timerEnd={timerEnd}
         setTimerEnd={setTimerEnd}
