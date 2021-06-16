@@ -34,7 +34,7 @@ const AuthenticationNavigator = (props) => {
 };
 const AppNavigator = (props) => {
   return (
-    <AppStack.Navigator>
+    <AppStack.Navigator headerMode="none">
       <AppStack.Screen name="Home">
         {(screenProps) => (
           <Home {...screenProps} updateAuthState={props.updateAuthState} />
@@ -74,7 +74,6 @@ function App() {
   }
 
   return (
-   
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
@@ -84,9 +83,6 @@ function App() {
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
     </NavigationContainer>
-
-   
-    
   );
 
   // async function signOut() {

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
@@ -11,7 +20,12 @@ export default function SignUp({ navigation }) {
   const [phone, setPhone] = useState('');
   async function signUp() {
     try {
-      await Auth.signUp({ username, password, attributes: { email } });
+      await Auth.signUp({
+        username,
+        password,
+        email,
+        attributes: { email },
+      });
       console.log('✅ Sign-up Confirmed');
       navigation.navigate('ConfirmSignUp');
     } catch (error) {
@@ -20,57 +34,67 @@ export default function SignUp({ navigation }) {
   }
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.container}>
-      <Image
-          style={styles.logo}
-          source={require('../images/ramblr-logo.png')}
-        />
-        <Text style={styles.title}>Create a new account</Text>
-        <AppTextInput
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          leftIcon="account"
-          placeholder="Enter username"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-        <AppTextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          leftIcon="lock"
-          placeholder="Enter password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry
-          textContentType="password"
-        />
-        <AppTextInput
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          leftIcon="email"
-          placeholder="Enter email"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-        <AppTextInput
-          value={phone}
-          onChangeText={(text) => setPhone(text)}
-          leftIcon="phone"
-          placeholder="Enter number here"
-          keyboardType="email-address"
-          keyboardType="numeric"
-        />
-        <AppButton title="Sign Up" onPress={signUp} />
-        <View style={styles.footerButtonContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-            <Text style={styles.forgotPasswordButtonText}>
-              Already have an account? Sign In
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <ImageBackground
+        source={require('../images/ramblr-background-1.jpg')}
+        style={styles.image}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              source={require('../images/ramblr-logo.png')}
+            />
+            <Text style={styles.title}>Create a new account</Text>
+            <AppTextInput
+              value={username}
+              onChangeText={(text) => setUsername(text)}
+              leftIcon="account"
+              placeholder="Enter username"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="username"
+            />
+
+            <AppTextInput
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              leftIcon="lock"
+              placeholder="Enter password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry
+              textContentType="password"
+            />
+            <AppTextInput
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              leftIcon="email"
+              placeholder="Enter email"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+            />
+
+            <AppTextInput
+              value={phone}
+              onChangeText={(text) => setPhone(text)}
+              leftIcon="phone"
+              placeholder="Enter number here"
+              textContentType="telephoneNumber"
+              keyboardType="numeric"
+            />
+
+            <AppButton title="Sign Up" onPress={signUp} />
+            <View style={styles.footerButtonContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                <Text style={styles.forgotPasswordButtonText}>
+                  Already have an account? Sign In
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -78,8 +102,8 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    paddingTop: 130,
-    backgroundColor: '#63a55d',
+    paddingTop: -45,
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
@@ -87,7 +111,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: '#202020',
+    color: 'white',
     fontWeight: '500',
     marginVertical: 15,
   },
@@ -97,13 +121,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   forgotPasswordButtonText: {
-    color: '#deffd6',
+    color: 'white',
     fontSize: 18,
     fontWeight: '600',
   },
   logo: {
+    marginTop: 130,
     width: 300,
     height: 40,
     resizeMode: 'contain',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    height: '120%',
   },
 });
