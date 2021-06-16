@@ -15,6 +15,7 @@ export default function Home({ updateAuthState }) {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.logocontainer}></View>
       <Image
         style={styles.logo}
         source={require('../images/ramblr-logo.png')}
@@ -31,8 +32,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
+    marginTop: -50,
+    marginBottom: 20,
     width: 300,
     height: 40,
     resizeMode: 'contain',
+  },
+  logocontainer: {
+    height: 100,
+    width: 380,
+    backgroundColor: '#63a55d',
+    resizeMode: 'cover',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    elevation: 5,
   },
 });

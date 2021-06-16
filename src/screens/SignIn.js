@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
@@ -18,40 +27,47 @@ export default function SignIn({ navigation, updateAuthState }) {
   }
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={require('../images/ramblr-logo.png')}
-        />
-        <Text style={styles.title}>Sign in to your account</Text>
-        <AppTextInput
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          leftIcon="account"
-          placeholder="Enter username"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-        <AppTextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          leftIcon="lock"
-          placeholder="Enter password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry
-          textContentType="password"
-        />
-        <AppButton title="Login" onPress={signIn} />
-        <View style={styles.footerButtonContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.forgotPasswordButtonText}>
-              Don't have an account? Sign Up
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <ImageBackground
+        source={require('../images/ramblr-background-1.jpg')}
+        style={styles.image}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              source={require('../images/ramblr-logo.png')}
+            />
+            <Text style={styles.title}>Sign in to your account</Text>
+            <AppTextInput
+              value={username}
+              onChangeText={(text) => setUsername(text)}
+              leftIcon="account"
+              placeholder="Enter username"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+            />
+            <AppTextInput
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              leftIcon="lock"
+              placeholder="Enter password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry
+              textContentType="password"
+            />
+            <AppButton title="Login" onPress={signIn} />
+            <View style={styles.footerButtonContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                <Text style={styles.forgotPasswordButtonText}>
+                  Don't have an account? Sign Up
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -59,8 +75,8 @@ export default function SignIn({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    paddingTop: 130,
-    backgroundColor: '#63a55d',
+    paddingTop: -45,
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
@@ -68,7 +84,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: '#202020',
+    color: 'white',
     fontWeight: '500',
     marginVertical: 15,
   },
@@ -78,13 +94,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   forgotPasswordButtonText: {
-    color: '#deffd6',
+    color: 'white',
     fontSize: 18,
     fontWeight: '600',
   },
   logo: {
+    marginTop: 130,
     width: 300,
     height: 40,
     resizeMode: 'contain',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    height: '120%',
   },
 });
