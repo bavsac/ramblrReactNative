@@ -6,7 +6,8 @@ import Marker from 'react-native-maps';
 import { createMessage } from '../utils/sms-utils';
 import ScheduleText from '../components/ScheduleText'
 
-export default function Coordinates(endTime) {
+export default function Coordinates({endTime, loggedInUser}) {
+  console.log(loggedInUser, '<<<<logged in user in coordinates')
   const [isLoading, setIsLoading] = useState(true);
   let latitude = "not done yet"
   let longitude = "not done yet"
@@ -59,7 +60,7 @@ export default function Coordinates(endTime) {
       <View style={styles.container}>
       {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
       {/* <MapView style={styles.map} showsUserLocation region={region}></MapView> */}
-      <ScheduleText latitude={latitude} longitude={longitude} endTime={endTime}/>
+      <ScheduleText loggedInUser={loggedInUser} latitude={latitude} longitude={longitude} endTime={endTime}/>
     </View>
     );
   }

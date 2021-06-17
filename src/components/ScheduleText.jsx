@@ -6,21 +6,17 @@ import API_KEY from "../../API_KEY.env.js"
 import AppTextInput from '../components/AppTextInput';
 
 
-const ScheduleText = ({ endTime, latitude, longitude }) => {
+const ScheduleText = ({ endTime, latitude, longitude, loggedInUser }) => {
   const [contactNumber, setContactNumber] = useState('');
   const [time, setTime] = useState(0);
   const [messageId, setMessageId] = useState(69420);
   const [confirmContactNumber, setConfirmContactNumber] = useState('');
-  const userName = 'Cal';
-  const contactName = 'Christian';
   const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
 
-  console.log('endtime from ScheduleText:', endTime);
 
     axios.interceptors.request.use(
         (config) => {
           config.headers.authorization = API_KEY;
-          // console.log("SendText >>>>>>> ","config changed");
           return config;
         },
         (err) => {
@@ -30,13 +26,7 @@ const ScheduleText = ({ endTime, latitude, longitude }) => {
 
       const beginRamble = () => {
         setTimeout(() => {
-          // console.log('#############################################message send attempt');
-          const message = createMessage(userName, contactName, latitude, longitude);
-          // console.log(message, '<<<<< message');
-          // console.log(confirmedContactNumber, '<<<<< confirmedcontactnumber!!!');
-          // console.log(contactNumber, '<<<<< contact number');
-          // console.log(confirmContactNumber, '<<<< confirmcontactnumber');
-          // console.log('should send after', endTime, 'seconds <<<');
+          const message = createMessage(loggedInUser, latitude, longitude);
           sendMessage(confirmContactNumber, message) 
         
         }, endTime * 1000);
@@ -83,7 +73,6 @@ const ScheduleText = ({ endTime, latitude, longitude }) => {
           onPress={() => {
             setConfirmedContactNumber(confirmContactNumber);
             // setTimerEnd(false);
-            console.log('TimeSelector >>>>>> button pressed');
             beginRamble();
           }}
           title="Start timer!"

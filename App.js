@@ -18,12 +18,16 @@ Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
 const AppStack = createStackNavigator();
 const AuthenticationNavigator = (props) => {
+  console.log(props, '<<<authnav props')
+  const {setLoggedInUser} = props
   return (
     <AuthenticationStack.Navigator headerMode="none">
       <AuthenticationStack.Screen name="SignIn">
         {(screenProps) => (
-          <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
+          <SignIn setLoggedInUser={setLoggedInUser} {...screenProps} updateAuthState={props.updateAuthState} />
+          
         )}
+        
       </AuthenticationStack.Screen>
       <AuthenticationStack.Screen name="SignUp" component={SignUp} />
       <AuthenticationStack.Screen
@@ -34,11 +38,14 @@ const AuthenticationNavigator = (props) => {
   );
 };
 const AppNavigator = (props) => {
+  console.log(props.screenprops, '<<<<props')
+  const {loggedInUser} = props
+  console.log(props, 'line 43 props')
   return (
     <AppStack.Navigator headerMode="none">
       <AppStack.Screen name="Home">
         {(screenProps) => (
-          <Home {...screenProps} updateAuthState={props.updateAuthState} />
+          <Home loggedInUser={loggedInUser} {...screenProps} updateAuthState={props.updateAuthState} />
         )}
       </AppStack.Screen>
     </AppStack.Navigator>
@@ -56,7 +63,9 @@ const Initializing = () => {
 const Stack = createStackNavigator();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState('')
   const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
+  console.log(loggedInUser, '<<<<<logged in user in app')
 
   useEffect(() => {
     checkAuthState();
@@ -80,12 +89,11 @@ function App() {
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
-        <AppNavigator updateAuthState={updateAuthState} />
+        <AppNavigator loggedInUser={loggedInUser} updateAuthState={updateAuthState} />
       )}
       {isUserLoggedIn === 'loggedOut' && (
-        <AuthenticationNavigator updateAuthState={updateAuthState} />
+        <AuthenticationNavigator setLoggedInUser={setLoggedInUser}  updateAuthState={updateAuthState} />
       )}
-
     </NavigationContainer>
   );
 }

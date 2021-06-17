@@ -11,7 +11,8 @@ import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
 import { TimeSelector } from '../components/TimeSelector';
 
-export default function Home({ updateAuthState }) {
+export default function Home({ updateAuthState, loggedInUser }) {
+  console.log(loggedInUser, '<<<logged in user in home')
   async function signOut() {
     try {
       await Auth.signOut();
@@ -33,7 +34,7 @@ export default function Home({ updateAuthState }) {
         />
         
         <AppButton onPress={signOut} title="Sign Out " />
-        <TimeSelector />
+        <TimeSelector loggedInUser={loggedInUser}/>
       </View>
     </ImageBackground>
   );

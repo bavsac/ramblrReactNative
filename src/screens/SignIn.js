@@ -13,11 +13,12 @@ import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
-export default function SignIn({ navigation, updateAuthState }) {
+export default function SignIn({ navigation, updateAuthState, setLoggedInUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function signIn() {
     try {
+      setLoggedInUser(username)
       await Auth.signIn(username, password);
       console.log('✅ Success');
       updateAuthState('loggedIn');

@@ -3,12 +3,10 @@ import axios from 'axios';
 const baseURL = `https://www.google.com/maps/search/?api=1&query=`;
 let myLat = '53.3734972';
 let myLong = '-2.5842247,14z';
-const contactName = 'Parsley';
-const userName = 'Cal';
 
-export const createMessage = (userName, contactName, latitude, longitude) => {
+export const createMessage = (userName, latitude, longitude) => {
 	const locationURL = `${baseURL}${latitude},${longitude}`;
-	const message = `Hello ${contactName}, the time of your friend, ${userName}'s Rambl has finished.  Their last known location is ${locationURL}.`;
+	const message = `Hello, the time of your friend ${userName}'s Rambl has finished.  Their last known location is ${locationURL}.`;
 	return message;
 };
 

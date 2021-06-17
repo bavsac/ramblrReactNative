@@ -21,7 +21,8 @@ import Coordinates from './Coordinates';
 // import ScheduleText from './ScheduleText'
 const moment = require('moment');
 
-export const TimeSelector = () => {
+export const TimeSelector = ({loggedInUser}) => {
+  console.log(loggedInUser, '<<<<logged in user in timeselector')
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -87,7 +88,7 @@ export const TimeSelector = () => {
             />
           )}
 
-          <Coordinates endTime={endTime} />
+          <Coordinates loggedInUser={loggedInUser} endTime={endTime} />
 
           {/* <View style={styles.timerButtons}>
           {contactNumber === confirmContactNumber &&
