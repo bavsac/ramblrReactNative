@@ -6,14 +6,19 @@ import {
   Button,
   Image,
   ImageBackground,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
 import { TimeSelector } from '../components/TimeSelector';
 
-export default function Home({ updateAuthState, loggedInUser, navigation }) {
-  console.log(loggedInUser, '<<<logged in user in home');
+export default function Home({
+  updateAuthState,
+  loggedInUser,
+  navigation,
+  endTime,
+  setEndTime
+}) {
   async function signOut() {
     try {
       await Auth.signOut();
@@ -34,13 +39,17 @@ export default function Home({ updateAuthState, loggedInUser, navigation }) {
           source={require('../images/ramblr-logo.png')}
         />
         <ScrollView>
-          <TimeSelector loggedInUser={loggedInUser} />
+          <TimeSelector
+            endTime={endTime}
+            setEndTime={setEndTime}
+            loggedInUser={loggedInUser}
+          />
         </ScrollView>
         <AppButton
-          title="Go to Map"
+          title='Go to Map'
           onPress={() => navigation.navigate('Map')}
         />
-        <AppButton onPress={signOut} title="Sign Out " />
+        <AppButton onPress={signOut} title='Sign Out ' />
       </View>
     </ImageBackground>
   );
@@ -48,14 +57,14 @@ export default function Home({ updateAuthState, loggedInUser, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   logo: {
     marginTop: -53,
     marginBottom: 20,
     width: 300,
     height: 40,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   logocontainer: {
     height: 100,
@@ -66,12 +75,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3,
     elevation: 15,
-    opacity: 0.8,
+    opacity: 0.8
   },
   image: {
     flex: 1,
     resizeMode: 'cover',
     width: '100%',
-    height: '120%',
-  },
+    height: '120%'
+  }
 });

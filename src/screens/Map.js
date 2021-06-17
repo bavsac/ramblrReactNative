@@ -6,24 +6,24 @@ import {
   Image,
   ImageBackground,
   ActivityIndicator,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
-import Coordinates from '../components/Coordinates';
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
+import CounterApp from '../components/CounterApp';
 
-export default function Map({ updateAuthState, navigation }) {
+export default function Map({ updateAuthState, navigation, endTime }) {
   const [isLoading, setIsLoading] = useState(true);
   let latitude = 'not done yet';
   let longitude = 'not done yet';
   const [location, setLocation] = useState({
     coords: {
       longitude: 0,
-      latitude: 0,
-    },
+      latitude: 0
+    }
   });
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -59,7 +59,7 @@ export default function Map({ updateAuthState, navigation }) {
     latitude: location.coords.latitude,
     longitude: location.coords.longitude,
     latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    longitudeDelta: 0.0421
   };
 
   if (isLoading) {
@@ -76,8 +76,8 @@ export default function Map({ updateAuthState, navigation }) {
           />
           <ActivityIndicator
             style={styles.isloading}
-            size="large"
-            color="white"
+            size='large'
+            color='white'
           />
         </View>
       </ImageBackground>
@@ -96,18 +96,17 @@ export default function Map({ updateAuthState, navigation }) {
           />
 
           <Text style={styles.headerText}>Enjoy your Rambl!</Text>
-          {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
           <MapView
             style={styles.map}
             showsUserLocation
             region={region}
           ></MapView>
-          <AppButton title="Complete Rambl" />
+          <CounterApp endTime={endTime} />
+          <AppButton title='Complete Rambl' />
           <AppButton
-            title="Go to main screen"
+            title='Go to main screen'
             onPress={() => navigation.navigate('Home')}
           />
-          {/* <AppButton onPress={signOut} title="Sign Out " /> */}
         </View>
       </ImageBackground>
     );
@@ -117,14 +116,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
 
-    alignItems: 'center',
+    alignItems: 'center'
   },
   logo: {
     marginTop: -53,
     marginBottom: 20,
     width: 300,
     height: 40,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   logocontainer: {
     height: 100,
@@ -135,22 +134,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3,
     elevation: 15,
-    opacity: 0.8,
+    opacity: 0.8
   },
   image: {
     flex: 1,
     resizeMode: 'cover',
     width: '100%',
-    height: '120%',
+    height: '120%'
   },
   map: {
     height: 300,
     width: 300,
-    borderRadius: 20,
+    borderRadius: 20
   },
   isloading: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   headerText: {
     marginTop: 50,
@@ -165,6 +164,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 1,
     shadowRadius: 2,
-    elevation: 15,
-  },
+    elevation: 15
+  }
 });

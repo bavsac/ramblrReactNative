@@ -1,0 +1,65 @@
+{
+    "paths": [
+        {
+            "name": "/users/{username}",
+            "lambdaFunction": "accessUserInformationRamblrReactNative",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ],
+                "userPoolGroups": {
+                    "Admin": [
+                        "/POST",
+                        "/GET",
+                        "/PUT",
+                        "/PATCH",
+                        "/DELETE"
+                    ]
+                }
+            },
+            "policyResourceName": "/users/*"
+        }
+    ],
+    "resourceName": "userApi",
+    "apiName": "userApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "accessUserInformationRamblrReactNative"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-ramblrreactnative-dev-121319-authRole",
+        "unAuthRoleName": "amplify-ramblrreactnative-dev-121319-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "accessUserInformationRamblrReactNative",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "auth",
+            "resourceName": "ramblrreactnative2a7ef6822a7ef682",
+            "attributes": [
+                "UserPoolId"
+            ]
+        },
+        {
+            "category": "auth",
+            "resourceName": "userPoolGroups",
+            "attributes": [
+                "AdminGroupRole"
+            ]
+        }
+    ],
+    "uuid": "704ff68f",
+    "authResourceName": "ramblrreactnative2a7ef6822a7ef682"
+}

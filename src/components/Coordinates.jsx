@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
-import MapView from 'react-native-maps';
-import Marker from 'react-native-maps';
 import { createMessage } from '../utils/sms-utils';
 import ScheduleText from '../components/ScheduleText';
 
 export default function Coordinates({ endTime, loggedInUser }) {
-  console.log(loggedInUser, '<<<<logged in user in coordinates');
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
   let latitude = 'not done yet';
   let longitude = 'not done yet';
   const [location, setLocation] = useState({
     coords: {
       longitude: 0,
-      latitude: 0,
-    },
+      latitude: 0
+    }
   });
-  const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -49,18 +46,16 @@ export default function Coordinates({ endTime, loggedInUser }) {
     latitude: location.coords.latitude,
     longitude: location.coords.longitude,
     latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    longitudeDelta: 0.0421
   };
 
   if (isLoading) {
     return (
-      <ActivityIndicator style={styles.isloading} size="large" color="white" />
+      <ActivityIndicator style={styles.isloading} size='large' color='white' />
     );
   } else {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
-        {/* <MapView style={styles.map} showsUserLocation region={region}></MapView> */}
         <ScheduleText
           loggedInUser={loggedInUser}
           latitude={latitude}
@@ -76,10 +71,10 @@ const styles = StyleSheet.create({
   map: {
     height: 300,
     width: 300,
-    borderRadius: 20,
+    borderRadius: 20
   },
   isloading: {
     flex: 1,
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });

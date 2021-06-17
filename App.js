@@ -18,11 +18,10 @@ Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
 const AppStack = createStackNavigator();
 const AuthenticationNavigator = (props) => {
-  console.log(props, '<<<authnav props');
   const { setLoggedInUser } = props;
   return (
-    <AuthenticationStack.Navigator headerMode="none">
-      <AuthenticationStack.Screen name="SignIn">
+    <AuthenticationStack.Navigator headerMode='none'>
+      <AuthenticationStack.Screen name='SignIn'>
         {(screenProps) => (
           <SignIn
             setLoggedInUser={setLoggedInUser}
@@ -31,32 +30,33 @@ const AuthenticationNavigator = (props) => {
           />
         )}
       </AuthenticationStack.Screen>
-      <AuthenticationStack.Screen name="SignUp" component={SignUp} />
+      <AuthenticationStack.Screen name='SignUp' component={SignUp} />
       <AuthenticationStack.Screen
-        name="ConfirmSignUp"
+        name='ConfirmSignUp'
         component={ConfirmSignUp}
       />
     </AuthenticationStack.Navigator>
   );
 };
 const AppNavigator = (props) => {
-  console.log(props.screenprops, '<<<<props');
-  const { loggedInUser } = props;
-  console.log(props, 'line 43 props');
+  const { loggedInUser, endTime, setEndTime } = props;
   return (
-    <AppStack.Navigator headerMode="none">
-      <AppStack.Screen name="Home">
+    <AppStack.Navigator headerMode='none'>
+      <AppStack.Screen name='Home'>
         {(screenProps) => (
           <Home
+            endTime={endTime}
+            setEndTime={setEndTime}
             loggedInUser={loggedInUser}
             {...screenProps}
             updateAuthState={props.updateAuthState}
           />
         )}
       </AppStack.Screen>
-      <AppStack.Screen name="Map">
+      <AppStack.Screen name='Map'>
         {(screenProps) => (
           <Map
+            endTime={endTime}
             loggedInUser={loggedInUser}
             {...screenProps}
             updateAuthState={props.updateAuthState}
@@ -70,7 +70,7 @@ const AppNavigator = (props) => {
 const Initializing = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="tomato" />
+      <ActivityIndicator size='large' color='tomato' />
     </View>
   );
 };
@@ -80,7 +80,7 @@ const Stack = createStackNavigator();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState('');
   const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
-  console.log(loggedInUser, '<<<<<logged in user in app');
+  const [endTime, setEndTime] = useState('');
 
   useEffect(() => {
     checkAuthState();
@@ -89,10 +89,8 @@ function App() {
   async function checkAuthState() {
     try {
       await Auth.currentAuthenticatedUser();
-      console.log('✅ User is signed in');
       setUserLoggedIn('loggedIn');
     } catch (err) {
-      console.log('❌ User is not signed in');
       setUserLoggedIn('loggedOut');
     }
   }
@@ -105,6 +103,8 @@ function App() {
       {isUserLoggedIn === 'initializing' && <Initializing />}
       {isUserLoggedIn === 'loggedIn' && (
         <AppNavigator
+          endTime={endTime}
+          setEndTime={setEndTime}
           loggedInUser={loggedInUser}
           updateAuthState={updateAuthState}
         />

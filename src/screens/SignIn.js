@@ -7,20 +7,23 @@ import {
   Image,
   ImageBackground,
   TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
-export default function SignIn({ navigation, updateAuthState, setLoggedInUser }) {
+export default function SignIn({
+  navigation,
+  updateAuthState,
+  setLoggedInUser
+}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function signIn() {
     try {
-      setLoggedInUser(username)
+      setLoggedInUser(username);
       await Auth.signIn(username, password);
-      console.log('✅ Success');
       updateAuthState('loggedIn');
     } catch (error) {
       console.log('❌ Error signing in...', error);
@@ -42,23 +45,23 @@ export default function SignIn({ navigation, updateAuthState, setLoggedInUser })
             <AppTextInput
               value={username}
               onChangeText={(text) => setUsername(text)}
-              leftIcon="account"
-              placeholder="Enter username"
-              autoCapitalize="none"
-              keyboardType="email-address"
-              textContentType="emailAddress"
+              leftIcon='account'
+              placeholder='Enter username'
+              autoCapitalize='none'
+              keyboardType='email-address'
+              textContentType='emailAddress'
             />
             <AppTextInput
               value={password}
               onChangeText={(text) => setPassword(text)}
-              leftIcon="lock"
-              placeholder="Enter password"
-              autoCapitalize="none"
+              leftIcon='lock'
+              placeholder='Enter password'
+              autoCapitalize='none'
               autoCorrect={false}
               secureTextEntry
-              textContentType="password"
+              textContentType='password'
             />
-            <AppButton title="Login" onPress={signIn} />
+            <AppButton title='Login' onPress={signIn} />
             <View style={styles.footerButtonContainer}>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                 <Text style={styles.forgotPasswordButtonText}>
@@ -77,38 +80,38 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     paddingTop: -45,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 20,
     color: 'white',
     fontWeight: '500',
-    marginVertical: 15,
+    marginVertical: 15
   },
   footerButtonContainer: {
     marginVertical: 15,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   forgotPasswordButtonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   logo: {
     marginTop: 130,
     width: 300,
     height: 40,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   image: {
     flex: 1,
     resizeMode: 'cover',
     width: '100%',
-    height: '120%',
-  },
+    height: '120%'
+  }
 });
