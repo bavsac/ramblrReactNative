@@ -97,11 +97,11 @@ export default function Map({ updateAuthState, navigation }) {
 
           <Text style={styles.headerText}>Enjoy your Rambl!</Text>
           {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
-          <MapView
+          {/* <MapView
             style={styles.map}
             showsUserLocation
             region={region}
-          ></MapView>
+          ></MapView> */}
           <AppButton title="Complete Rambl" />
           <AppButton
             title="Go to main screen"

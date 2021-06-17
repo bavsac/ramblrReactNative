@@ -10,9 +10,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { durationInSeconds } from '../utils/time-utils';
+import durationInSeconds from '../utils/time-utils';
 
-// import CounterApp from './CounterApp';
+import CounterApp from './CounterApp';
 // import SendText from './SendText';
 
 import AppButton from '../components/AppButton';
@@ -46,7 +46,6 @@ export const TimeSelector = ({ loggedInUser }) => {
 
     const duration = durationInSeconds(unformattedTimestamp);
     setEndTime(duration);
-    console.log('the time from timeSelector:', endTime);
 
     // const output = durationInSeconds(event.nativeEvent.timestamp);
     // setDuration(output);
