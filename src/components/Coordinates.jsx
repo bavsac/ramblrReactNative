@@ -4,13 +4,13 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import Marker from 'react-native-maps';
 import { createMessage } from '../utils/sms-utils';
-import ScheduleText from '../components/ScheduleText'
+import ScheduleText from '../components/ScheduleText';
 
-export default function Coordinates({endTime, loggedInUser}) {
-  console.log(loggedInUser, '<<<<logged in user in coordinates')
+export default function Coordinates({ endTime, loggedInUser }) {
+  console.log(loggedInUser, '<<<<logged in user in coordinates');
   const [isLoading, setIsLoading] = useState(true);
-  let latitude = "not done yet"
-  let longitude = "not done yet"
+  let latitude = 'not done yet';
+  let longitude = 'not done yet';
   const [location, setLocation] = useState({
     coords: {
       longitude: 0,
@@ -37,11 +37,12 @@ export default function Coordinates({endTime, loggedInUser}) {
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
-  } if (location) {
+  }
+  if (location) {
     longitude = JSON.stringify(location.coords.longitude);
     latitude = JSON.stringify(location.coords.latitude);
     text = `Latitude: ${latitude} Longitude: ${longitude}`;
-    createMessage()
+    createMessage();
   }
 
   const region = {
@@ -58,10 +59,15 @@ export default function Coordinates({endTime, loggedInUser}) {
   } else {
     return (
       <View style={styles.container}>
-      {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
-      {/* <MapView style={styles.map} showsUserLocation region={region}></MapView> */}
-      <ScheduleText loggedInUser={loggedInUser} latitude={latitude} longitude={longitude} endTime={endTime}/>
-    </View>
+        {/* <Text style={styles.paragraph}>your location: {text}</Text> */}
+        {/* <MapView style={styles.map} showsUserLocation region={region}></MapView> */}
+        <ScheduleText
+          loggedInUser={loggedInUser}
+          latitude={latitude}
+          longitude={longitude}
+          endTime={endTime}
+        />
+      </View>
     );
   }
 }

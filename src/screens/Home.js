@@ -6,13 +6,14 @@ import {
   Button,
   Image,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
 import { TimeSelector } from '../components/TimeSelector';
 
-export default function Home({ updateAuthState, loggedInUser }) {
-  console.log(loggedInUser, '<<<logged in user in home')
+export default function Home({ updateAuthState, loggedInUser, navigation }) {
+  console.log(loggedInUser, '<<<logged in user in home');
   async function signOut() {
     try {
       await Auth.signOut();
@@ -32,9 +33,14 @@ export default function Home({ updateAuthState, loggedInUser }) {
           style={styles.logo}
           source={require('../images/ramblr-logo.png')}
         />
-        
+        <ScrollView>
+          <TimeSelector loggedInUser={loggedInUser} />
+        </ScrollView>
+        <AppButton
+          title="Go to Map"
+          onPress={() => navigation.navigate('Map')}
+        />
         <AppButton onPress={signOut} title="Sign Out " />
-        <TimeSelector loggedInUser={loggedInUser}/>
       </View>
     </ImageBackground>
   );
@@ -42,7 +48,6 @@ export default function Home({ updateAuthState, loggedInUser }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     alignItems: 'center',
   },
   logo: {
