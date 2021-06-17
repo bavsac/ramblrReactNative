@@ -19,7 +19,6 @@ export const TimeSelector = ({ loggedInUser, endTime, setEndTime }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  // const [endTime, setEndTime] = useState('');
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
