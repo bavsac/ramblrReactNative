@@ -3,6 +3,7 @@ import { sendMessage, cancelMessage, createMessage } from '../utils/sms-utils';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import axios from 'axios';
 import API_KEY from "../../API_KEY.env.js"
+import AppTextInput from '../components/AppTextInput';
 
 
 const ScheduleText = ({ endTime, latitude, longitude }) => {
@@ -44,7 +45,7 @@ const ScheduleText = ({ endTime, latitude, longitude }) => {
     return (
         <View>
   
-      <TextInput
+      {/* <TextInput
         style={styles.input}
         value={contactNumber}
         placeholder="enter number"
@@ -57,7 +58,25 @@ const ScheduleText = ({ endTime, latitude, longitude }) => {
         placeholder="Re-enter number"
         onChangeText={setConfirmContactNumber}
         keyboardType="numeric"
-      />
+      /> */}
+
+         <AppTextInput
+          leftIcon="phone"
+          placeholder="Enter trusted contact number here"
+          textContentType="telephoneNumber"
+          style={styles.input}
+          value={contactNumber}
+          onChangeText={setContactNumber}
+          keyboardType="numeric"
+        />
+        <AppTextInput
+          leftIcon="phone"
+          style={styles.input}
+          value={confirmContactNumber}
+          placeholder="Re-enter number"
+          onChangeText={setConfirmContactNumber}
+          keyboardType="numeric"
+        />
 
       {contactNumber === confirmContactNumber && confirmContactNumber !== '' ? (
         <Button
@@ -76,10 +95,9 @@ const ScheduleText = ({ endTime, latitude, longitude }) => {
 };
 
 const styles = StyleSheet.create({
+
   input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
+    width: 150,
   },
 });
 

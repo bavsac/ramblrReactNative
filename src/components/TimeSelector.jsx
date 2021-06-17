@@ -11,10 +11,11 @@ import {
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { durationInSeconds } from '../utils/time-utils';
+
 // import CounterApp from './CounterApp';
 // import SendText from './SendText';
-// import AppTextInput from '../components/AppTextInput';
-// import AppButton from '../components/AppButton';
+
+import AppButton from '../components/AppButton';
 import Coordinates from './Coordinates';
 
 // import ScheduleText from './ScheduleText'
@@ -88,32 +89,14 @@ export const TimeSelector = () => {
       
       <Coordinates endTime={endTime}/>
 
-        </View>
-        {/* <AppTextInput
-          leftIcon="phone"
-          placeholder="Enter trusted contact number here"
-          textContentType="telephoneNumber"
-          style={styles.input}
-          value={contactNumber}
-          onChangeText={setContactNumber}
-          keyboardType="numeric"
-        />
-        <AppTextInput
-          leftIcon="phone"
-          style={styles.input}
-          value={confirmContactNumber}
-          placeholder="Re-enter number"
-          onChangeText={setConfirmContactNumber}
-          keyboardType="numeric"
-        />
 
-        <View style={styles.timerButtons}>
+        {/* <View style={styles.timerButtons}>
           {contactNumber === confirmContactNumber &&
           confirmContactNumber !== '' ? (
             <AppButton
               onPress={() => {
                 Keyboard.dismiss;
-                setTimerEnd(false);
+                // setTimerEnd(false);
               }}
               title="Start timer!"
             />
@@ -132,37 +115,21 @@ export const TimeSelector = () => {
             title="Reset Timer"
           /> */}
         </View>
-        {/* <Text>duration in state: {duration}</Text> */}
-        {/* {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )} */}
-        {/* <CounterApp
-          timerEnd={timerEnd}
-          setTimerEnd={setTimerEnd}
-          duration={duration}
-        />
-        <SendText timerEnd={timerEnd} /> */}
-      {/* </View> */}
+        
+      </View>
     </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
     alignItems: 'center',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     borderRadius: 5,
   },
   input: {
-    width: 150,
+    width: 200,
   },
   headerText: {
     marginTop: 50,
