@@ -19,13 +19,13 @@ import AppButton from '../components/AppButton';
 import Coordinates from './Coordinates';
 
 // import ScheduleText from './ScheduleText'
-const moment = require ('moment')
+const moment = require('moment');
 
 export const TimeSelector = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [endTime, setEndTime] = useState("");
+  const [endTime, setEndTime] = useState('');
   // const [duration, setDuration] = useState(0);
   // const [timerEnd, setTimerEnd] = useState(false);
   // const [contactNumber, setContactNumber] = useState('');
@@ -41,11 +41,11 @@ export const TimeSelector = () => {
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
 
-    const unformattedTimestamp = event.nativeEvent.timestamp
+    const unformattedTimestamp = event.nativeEvent.timestamp;
 
-    const duration = durationInSeconds(unformattedTimestamp)
-    setEndTime(duration)
-    console.log("the time from timeSelector:",endTime)
+    const duration = durationInSeconds(unformattedTimestamp);
+    setEndTime(duration);
+    console.log('the time from timeSelector:', endTime);
 
     // const output = durationInSeconds(event.nativeEvent.timestamp);
     // setDuration(output);
@@ -74,23 +74,22 @@ export const TimeSelector = () => {
           <AppButton title="Select return time" onPress={showTimepicker} /> */}
           <Button onPress={showDatepicker} title="Select return date" />
           <Button onPress={showTimepicker} title="Select return time" />
-        
+
           {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
-      
-      
-      <Coordinates endTime={endTime}/>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+              style={styles.timepicker}
+            />
+          )}
 
+          <Coordinates endTime={endTime} />
 
-        {/* <View style={styles.timerButtons}>
+          {/* <View style={styles.timerButtons}>
           {contactNumber === confirmContactNumber &&
           confirmContactNumber !== '' ? (
             <AppButton
@@ -115,7 +114,6 @@ export const TimeSelector = () => {
             title="Reset Timer"
           /> */}
         </View>
-        
       </View>
     </TouchableWithoutFeedback>
   );
@@ -148,5 +146,9 @@ const styles = StyleSheet.create({
   },
   timerButtons: {
     alignItems: 'center',
+  },
+  timepicker: {
+    width: 100,
+    backgroundColor: 'white',
   },
 });
