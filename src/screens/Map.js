@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import AppButton from '../components/AppButton';
+import Coordinates from '../components/Coordinates';
 import { TimeSelector } from '../components/TimeSelector';
 
 export default function Home({ updateAuthState }) {
@@ -27,13 +28,14 @@ export default function Home({ updateAuthState }) {
     >
       <View style={styles.container}>
         <View style={styles.logocontainer}></View>
-        <Image
+        {/* <Image
           style={styles.logo}
           source={require('../images/ramblr-logo.png')}
-        />
-        
-        <AppButton onPress={signOut} title="Sign Out " />
+        /> */}
         <TimeSelector />
+        <AppButton onPress={signOut} title="Sign Out " />
+        {/* <Coordinates /> */}
+        {/* <Friends props /> */}
       </View>
     </ImageBackground>
   );

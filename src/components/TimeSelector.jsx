@@ -87,6 +87,7 @@ export const TimeSelector = () => {
       
       
       <Coordinates endTime={endTime}/>
+
         </View>
         {/* <AppTextInput
           leftIcon="phone"

@@ -58,7 +58,7 @@ export default function Coordinates(endTime) {
     return (
       <View style={styles.container}>
       <Text style={styles.paragraph}>your location: {text}</Text>
-      <MapView style={styles.map} showsUserLocation region={region}></MapView>
+      {/* <MapView style={styles.map} showsUserLocation region={region}></MapView> */}
       <ScheduleText latitude={latitude} longitude={longitude} endTime={endTime}/>
     </View>
     );

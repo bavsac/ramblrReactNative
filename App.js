@@ -12,8 +12,7 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import ConfirmSignUp from './src/screens/ConfirmSignUp';
 import Home from './src/screens/Home';
-import Coordinates from './src/components/Coordinates';
-import TimeSelector from './src/components/TimeSelector';
+import Map from './src/screens/Map';
 
 Amplify.configure(awsmobile);
 const AuthenticationStack = createStackNavigator();
@@ -54,6 +53,8 @@ const Initializing = () => {
   );
 };
 
+const Stack = createStackNavigator();
+
 function App() {
   const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
 
@@ -84,32 +85,9 @@ function App() {
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
+
     </NavigationContainer>
   );
-
-  // async function signOut() {
-  //   try {
-  //     await Auth.signOut();
-  //   } catch (error) {
-  //     console.log('Error signing out: ', error);
-  //   }
-  // }
-  // return (
-  //   <View style={styles.container}>
-  //     <Header />
-  //     <AppButton onPress={signOut} title="Sign Out " />
-  //     <Text>Open up App.js to start working on your app!</Text>
-  //     <StatusBar style="auto" />
-  //   </View>
-  // );
 }
 
 export default App;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#63a55d',
-//     alignItems: 'center',
-//   },
-// });
